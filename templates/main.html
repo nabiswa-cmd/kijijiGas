@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kijiji Gas System</title>
 
-  
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
   <style>
     :root {
@@ -28,7 +27,8 @@
       position: fixed;
       border-radius: 50%;
       opacity: 0.30;
-      z-index: 0;
+      z-index: -1;              /* keep behind everything */
+      pointer-events: none;     /* prevent blocking clicks */
       animation-duration: 7s;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
@@ -84,31 +84,35 @@
       animation-name: float5;
     }
 
-    /* Animations to make each circle move differently */
-    @keyframes float1 {
-      0%, 100% { transform: translate(0, 0); }
-      50%      { transform: translate(20px, 25px); }
+    /* Extra decorative circles */
+    .circle-purple {
+      width: 200px;
+      height: 200px;
+      background: #9c27b0;
+      bottom: 15%;
+      left: 15%;
+      opacity: 0.20;
+      animation-name: float6;
     }
 
-    @keyframes float2 {
-      0%, 100% { transform: translate(0, 0); }
-      50%      { transform: translate(-15px, -20px); }
+    .circle-green {
+      width: 100px;
+      height: 100px;
+      background: #4caf50;
+      top: 60%;
+      left: 70%;
+      opacity: 0.22;
+      animation-name: float7;
     }
 
-    @keyframes float3 {
-      0%, 100% { transform: translate(0, 0); }
-      50%      { transform: translate(25px, -10px); }
-    }
-
-    @keyframes float4 {
-      0%, 100% { transform: translate(0, 0); }
-      50%      { transform: translate(-30px, 15px); }
-    }
-
-    @keyframes float5 {
-      0%, 100% { transform: translate(0, 0); }
-      50%      { transform: translate(20px, -20px); }
-    }
+    /* Animations */
+    @keyframes float1 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(20px,25px);} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-15px,-20px);} }
+    @keyframes float3 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(25px,-10px);} }
+    @keyframes float4 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-30px,15px);} }
+    @keyframes float5 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(20px,-20px);} }
+    @keyframes float6 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(-20px,20px);} }
+    @keyframes float7 { 0%,100%{transform:translate(0,0);} 50%{transform:translate(15px,-15px);} }
 
     /* NAVBAR */
     .navbar {
@@ -143,9 +147,11 @@
   <div class="bg-circle circle-blue-small"></div>
   <div class="bg-circle circle-yellow-large"></div>
   <div class="bg-circle circle-faint"></div>
+  <div class="bg-circle circle-purple"></div>
+  <div class="bg-circle circle-green"></div>
 
   {% include 'nav.html' %}
-{% if messages %}
+  {% if messages %}
       {% for m in messages %}
         <div class="alert {% if m.tags %}alert-{{ m.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show" role="alert">
           {{ m }}
@@ -159,12 +165,12 @@
     {% endblock %}
   </div>
 
- <script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
-
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 
 </body>
+
 <!-- Footer -->
 <footer class="mt-5 bg-primary text-white pt-4 pb-3 position-relative">
   <div class="container">
