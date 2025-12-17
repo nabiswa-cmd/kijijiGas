@@ -4,6 +4,12 @@
 <div class="container mt-5">
   <h3>Complete Payment</h3>
 
+  {% if message %}
+    <div class="alert alert-info">
+      {{ message }}
+    </div>
+  {% endif %}
+
   <form method="POST">
     {% csrf_token %}
 
@@ -15,7 +21,7 @@
              value="{{ order.customer_phone }}">
     </div>
 
-    <p><strong>Total Amount:</strong> KES {{ order.total_amount }}</p>
+    <p><strong>Total Amount:</strong> KES {{ amount }}</p>
 
     <div class="mb-3">
       <label class="form-label">Cash Paid</label>
